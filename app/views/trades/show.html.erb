@@ -1,19 +1,43 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @trade.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @trade.description %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @trade.user %>
-</p>
-
-<%= link_to 'Edit', edit_trade_path(@trade) %> |
-<%= link_to 'Back', trades_path %>
+<div class="columns">
+  <div class="column is-8">
+    <h1 class="title is-1"><%= @trade.title %></h1>
+    <div class="content">
+      <p class="pb3 border-button">Post <%= time_ago_in_words(@trade.created_at) %> ago </p>
+      <div class="pt1"><%= sanitize markdown_to_html(@trade.description) %></div>
+    </div>
+    
+    <% if @trade.images.attached? %>
+      <div class="columns is-multiline">
+        <% @trade.images.each do |image| %>
+          <div class="column is-one-third">
+            <%= image_tag image.variant(resize: "800x600>") %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  
+  <div class="column is-3 is-offset-1">
+    <% if trade_author(@trade) %>
+      <div class="bg-light pa3 mb4 border-radius-3">
+        <p class="f6 pb1">Author actions:</p>
+        <div class="button-group">
+          <%= link_to "Edit trade: #{@trade_title}", edit_trade_path(@trade), 
+          class: 'button is-small' %>
+          <%= link_to "Back", trades_path, class: "button is-small" %>
+        </div>
+      </div>
+    <% end %>
+    <div class="pr5 mb4">
+      <p class="text-align-left f6">Trade author:</p>
+      <div class="inline-block nudge-down-10"><%= gravatar_for @trade.user,
+      size: 32 %></div>
+      <div class="inline-block"><%= @trade.user.name %></div>
+    </div>
+    <% if current_user.id != @trade.user_id %>
+      <%= link_to "Message #{@trade.user.name}", "#", class:"button is-link" %>
+    <% else %>
+      <%= link_to "Conversations", "#" %>
+    <% end %>
+  </div>
+</div>

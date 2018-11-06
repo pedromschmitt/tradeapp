@@ -15,7 +15,7 @@ class TradesController < ApplicationController
 
   # GET /trades/new
   def new
-    @trade = current_user.trades.built
+    @trade = current_user.trades.build
   end
 
   # GET /trades/1/edit
@@ -25,7 +25,7 @@ class TradesController < ApplicationController
   # POST /trades
   # POST /trades.json
   def create
-    @trade = current_user.trades.built(trade_params)
+    @trade = current_user.trades.build(trade_params)
 
     respond_to do |format|
       if @trade.save
