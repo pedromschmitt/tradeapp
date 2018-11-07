@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: pedroschmitt
+  api_key: '232588567544235'
+  api_secret: 0wNDKb9gupKTwIO3H2fTMSr1HDk
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: pedroschmitt
+  api_key: '232588567544235'
+  api_secret: 0wNDKb9gupKTwIO3H2fTMSr1HDk
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: pedroschmitt
+  api_key: '232588567544235'
+  api_secret: 0wNDKb9gupKTwIO3H2fTMSr1HDk
+  enhance_image_tag: true
+  static_image_support: false
